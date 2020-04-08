@@ -23,6 +23,8 @@ class Item(models.Model):
     category = models.CharField(choices=CATEGORY_CHOICES,max_length=2,default='SW')
     label = models.CharField(choices=LABEL_CHOICES,max_length=1,default='P')
     slug = models.SlugField(default='test-product')
+    description = models.TextField(default='')
+    quantity = models.IntegerField(default=1)
     def __str__(self):
         return self.title
 
@@ -30,19 +32,32 @@ class Item(models.Model):
         return reverse('product',kwargs={
             'slug':self.slug
         })
+
+    def get_add_to_card_url(self):
+        return reverse('add-to-card',kwargs={
+            'slug':self.slug
+        })
     
 
+
+import  datetime
 class OrderItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item,on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
     
     def __str__(self):
-        return self.title
+        return f"{self.quantity} Of {self.item.title}"
+
+
+
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL ,on_delete=models.CASCADE)
-    item = models.ManyToManyField(OrderItem)
+    items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(auto_now=True)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
