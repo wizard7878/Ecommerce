@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+<body>
+{% include '_parts/nav.html' %}
+<br><br><br><br>
+<main>
+    <div class="container">
+        {% include '_parts/_alerts.html' %}
+        <div class="table-responsive text-nowrap">
+            <h2 class="container">Request Refund</h2>
+            <hr>
+            <form method="post" action="{% url 'request-refund' %}">
+                {% csrf_token %}
+                <div class="container col-6 float-left">
+                <div class="form-group">
+                    <label class="">Refund Code:</label>
+                    {{ form.ref_code }}
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" required="" class="form-control" id="id_email">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Message:</label>
+                    {{ form.message }}
+                </div>
+
+                    <button type="submit" class="btn btn-success float-right">Send Refund Request</button>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+
+</main>
+
+
+{% include '_parts/footer.html' %}
+</body>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</html>

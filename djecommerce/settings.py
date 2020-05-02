@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    'django_countries' ,
     'core'
 ]
 
@@ -33,7 +33,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'djecommerce.urls'
-
+LOGIN_REDIRECT_URL = '/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

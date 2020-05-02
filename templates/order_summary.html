@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+<body>
+{% include '_parts/nav.html' %}
+<br><br><br><br>
+<main>
+    <div class="container">
+        {% include '_parts/_alerts.html' %}
+        <div class="table-responsive text-nowrap">
+            <h2>Order Summary</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Item title</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Item Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order_item in items.all %}
+                    <tr>
+
+                        <th scope="row"><h5>{{ order_item.item.title }}</h5></th>
+                        <td><h5>{{ order_item.item.price }}$</h5></td>
+                        <td><h5><a href="{% url 'remove-single-form-cart' order_item.item.slug %}"><img alt=""
+                                                                                                        class="mr-2"
+                                                                                                        width="15"
+                                                                                                        height="15"
+                                                                                                        src="{% static 'img/lightbox/prev.png' %}"></a>{{ order_item.quantity }}
+                            <a href="{% url 'add-single-form-cart' order_item.item.slug %}"><img alt="" class="ml-2"
+                                                                                                 width="15" height="15"
+                                                                                                 src="{% static 'img/lightbox/next.png' %}"></a>
+                        </h5>
+                        </td>
+                        {% if order_item.item.discount_price %}
+                            <td><h5>{{ order_item.get_total_item_price }}$
+                                <span class="badge badge-success mb-1"> Saving {{ order_item.get_amount_saved }} </span>
+                            </h5>
+                            </td>
+                        {% else %}
+                            <td><h5>{{ order_item.get_total_item_price }}$</h5></td>
+                        {% endif %}
+                        <td><a href="{% url 'delete-from-cart-summary' order_item.item.slug %}"><img alt="" width="20"
+                                                                                                     height="20"
+                                                                                                     src="{% static 'img/lightbox/close.png' %}">
+                        </a></td>
+                    </tr>
+                {% endfor %}
+                  <tr>
+                    <td><b><h5>Promo Total</h5></b></td>
+                    <td><b><h5>-{{ order.copon.amount }}$</h5></b></td>
+                </tr>
+                <tr>
+                    <td><b><h5>Order Total</h5></b></td>
+                    <td><b><h5>{{ order.get_total_item_all_price }}$</h5></b></td>
+                </tr>
+                <td colspan="5">
+                    <a class="btn btn-warning float-right ml-2" href="{% url 'checkout' %}">Checkout</a>
+                    <a class="btn btn-success float-right" href="{% url 'home' %}">Continue shoping</a>
+                </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+
+{% include '_parts/footer.html' %}
+</body>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</html>

@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+<nav class="navbar navbar-expand-lg navbar-light  lighten-3 mt-3 mb-5" style="background-color: #1c4960">
 
         <!-- Navbar brand -->
-        <span class="navbar-brand">Categories:</span>
+        <span class="navbar-brand" style="color: white;">Categories:</span>
 
         <!-- Collapse button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -15,26 +15,29 @@
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">All
+              <a class="nav-link" style="color: white" href="{% url 'home' %}">All
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+        {% for cate in Category %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Shirts</a>
+              <a class="nav-link" style="color: white" href="{% url 'filterCate' cate.title %}">{{cate.title}}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sport wears</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Outwears</a>
-            </li>
+              {% endfor %}
+
+{#            <li class="nav-item">#}
+{#              <a class="nav-link" style="color: white" href="#">Huawei</a>#}
+{#            </li>#}
+{#            <li class="nav-item">#}
+{#              <a class="nav-link" style="color: white" href="#">LG</a>#}
+{#            </li>#}
 
           </ul>
           <!-- Links -->
 
           <form class="form-inline">
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <input class="form-control mr-sm-2" style="color: white;" type="text" placeholder="Search" aria-label="Search">
             </div>
           </form>
         </div>

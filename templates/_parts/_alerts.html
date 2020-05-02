@@ -1,0 +1,35 @@
+{% load static %}
+{% if messages %}
+    {% for message in messages %}
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <div id="message" class="container mt-5 pt-5">
+            <div class="alert alert-success text-center alert-dismissible">
+                <button class="close" type="button"><span>&times;</span></button>
+                <strong>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+
+                    {% else %}
+                        {{ title }}
+
+                    {% endif %}
+                </strong>
+
+                {{ message }}
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script  type="text/javascript">
+    setTimeout(function () {
+        $('#message').slideDown('slow')
+    }, 3000);
+</script>
+{#<script src="{% static 'js/main.js' %}"></script>#}

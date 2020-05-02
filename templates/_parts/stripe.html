@@ -1,0 +1,34 @@
+<br><br>
+<div class="sr-root">
+      <div class="sr-main col-6 container card">
+
+            <form method="post">
+                <div class="container md-form">
+                    <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <input class="form-control " placeholder="Card Nubmer"/>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 mb-6">
+                        <input class="form-control " placeholder="CCVT"/>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 mb-8">
+                        <input type="date" class="form-control " placeholder="Exp Date"/>
+                    </div>
+
+                    <button type="submit" class="btn btn-mdb-color col-xl ">Payment</button>
+
+                </div>
+
+                {% csrf_token %}
+                    </div>
+            </form>
+        <div class="sr-result hidden">
+
+
+        </div>
+      </div>
+</div>
+
+<br><br>
